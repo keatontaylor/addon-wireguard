@@ -1,0 +1,25 @@
+#!/usr/bin/with-contenv bash
+# ==============================================================================
+# Hass.io Add-ons: WireGuard
+# Connects to WireGuard named pipe then activates interface
+# ==============================================================================
+# shellcheck disable=SC1091
+source /usr/lib/hassio-addons/base.sh
+
+declare -r PIPE=/tmp/wireguard.pipe
+
+# Connect to named pipe and search for "Device started"
+grep -q "Device started" $PIPE \
+    || hass.die 'Failed to attach to named pipe'
+
+# Add ip address to interface
+ip addr add dev wg0 `hass.config.get 'ip_address'` \
+    || hass.die 'Failed to add address to interface'
+
+# Apply configuration to interface
+wg setconf wg0 /etc/wireguard/wg0.conf \
+    || hass.die 'Failed to apply configuration to interface'
+
+# Bring up interface
+ip link set up dev wg0 \
+    || hass.die 'Failed to bring interface up'

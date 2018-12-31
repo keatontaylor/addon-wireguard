@@ -1,0 +1,22 @@
+#!/usr/bin/with-contenv bash
+# ==============================================================================
+# Hass.io Add-ons: WireGuard
+# Runs the WireGuard
+# ==============================================================================
+# shellcheck disable=SC1091
+source /usr/lib/hassio-addons/base.sh
+
+declare -r FINISH=/etc/services.d/wireguard/finish
+declare -r PIPE=/tmp/wireguard.pipe
+
+# Create named pipe
+mkfifo $PIPE \
+    || hass.die 'Failed to create named pipe'
+
+# Start 'interface-setup' service one-time
+s6-svc -o /var/run/s6/services/interface-setup/ \
+    || hass.die 'Failed to start service to bring up interface'
+
+# Run the WireGuard using the named pipe
+exec /usr/bin/wireguard-go --foreground wg0 &> >(tee $PIPE) \
+    || hass.die 'Failed to start WireGuard'
