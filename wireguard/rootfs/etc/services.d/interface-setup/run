@@ -12,9 +12,11 @@ declare -r PIPE=/tmp/wireguard.pipe
 grep -q "Device started" $PIPE \
     || hass.die 'Failed to attach to named pipe'
 
-# Add ip address to interface
-ip addr add dev wg0 `hass.config.get 'ip_address'` \
-    || hass.die 'Failed to add address to interface'
+# Add ip addresses to interface
+for ip in `hass.config.get 'addresses'`; do
+    ip addr add dev wg0 $ip \
+        || hass.die 'Failed to add address to interface'
+done
 
 # Apply configuration to interface
 wg setconf wg0 /etc/wireguard/wg0.conf \

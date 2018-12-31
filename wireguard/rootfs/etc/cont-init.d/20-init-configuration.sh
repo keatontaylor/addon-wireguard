@@ -19,6 +19,14 @@ mkdir -p $CONFIG_PATH \
 echo "[Interface]" > $CONFIG_FILE \
     || hass.die 'Failed to create WireGuard interface config file'
 
+# Add each dns to config if exists
+if [[ `hass.config.get 'dns'` ]]; then
+    for ip in `hass.config.get 'dns'`; do
+        echo $ip >> /etc/resolv.conf \
+            || hass.die 'Failed to add dns address to /etc/resolv.conf'
+    done
+fi
+
 # Add listen port to config
 echo "ListenPort =" `hass.config.get 'port'` >> $CONFIG_FILE \
     || hass.die 'Failed to add listen port to config file'

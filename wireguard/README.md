@@ -34,7 +34,13 @@ Example add-on configuration:
   "log_level": "info",
   "gateway": false,
   "port": 51820,
-  "ip_address": "192.168.99.1/24",
+  "addresses": [
+    "192.168.99.1/24"
+  ],
+  "dns": [
+    "8.8.8.8",
+    "8.8.4.4"
+  ],
   "private_key": "gIvaysivTg6FCHbhgOLpOWWNbufb++KwwEn2wm0ug18=",
   "peers": [
     {
@@ -85,14 +91,19 @@ Allows you to specify the UDP port used for the WireGuard connection.
 **Note**: _If you anticipate using WireGuard from outside of you network, be
 sure to add port forwarding rules to your router._
 
-### Option: `ip_address`
+### Option: `addresses`
 
-Allows you to specify the IP address used for the WireGuard connection. This
-must be in the form of CIDR notation.
+Allows you to specify a list of IP addresses used for the WireGuard connection.
+This must be in the form of CIDR notation.
 
 **Note**: _This address and network needs to be unique to the Hass.io instance
 and all peers that are configured. For example, if your home network is
 192.168.1.0/24, you cannot use any IP in that network range for this option._
+
+### Option: `dns`
+
+Allows you to specify a list of DNS addresses used for the WireGuard
+connection.
 
 ### Option: `private_key`
 

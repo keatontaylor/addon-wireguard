@@ -16,7 +16,9 @@ if hass.config.true 'gateway'; then
     iptables -t nat -A POSTROUTING -j WIREGUARD \
         || hass.die 'Failed to add jump rule to POSTROUTING chain'
 
-    # Add route for WireGuard IP address to access local networks
-    iptables -t nat -A WIREGUARD -s `hass.config.get 'ip_address'` -j MASQUERADE \
-        || hass.die 'Failed to add route for interface address to iptables'
+    # Add route for WireGuard addresses to access local networks
+    for ip in `hass.config.get 'addresses'`; do
+        iptables -t nat -A WIREGUARD -s $ip -j MASQUERADE \
+            || hass.die 'Failed to add route for interface address to iptables'
+    done
 fi
