@@ -5,6 +5,7 @@ from forms import InterfaceForm, PeerForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '6a598f99f0915fd9f158ae5597aad87d'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/wg.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
@@ -19,6 +20,7 @@ class Interface(db.Model):
 
     def __repr__(self):
         return f"Interface('wg{self.interface}', '{self.address}/{self.subnet_mask}')"
+
 
 class Peer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
