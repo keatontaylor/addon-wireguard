@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 from forms import InterfaceForm, PeerForm
 
 app = Flask(__name__)
@@ -11,6 +11,9 @@ def home():
 @app.route('/interface', methods=['GET', 'POST'])
 def interface():
     form = InterfaceForm()
+    if form.validate_on_submit():
+        flash(f'You have submitted a valid form!', 'success')
+        return redirect(url_for('home'))
     return render_template('interface.html', title='', form=form)
 
 @app.route('/peer', methods=['GET', 'POST'])
