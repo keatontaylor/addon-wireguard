@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for
 from forms import InterfaceForm, PeerForm
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '6a598f99f0915fd9f158ae5597aad87d'
 
 @app.route('/')
 def home():
