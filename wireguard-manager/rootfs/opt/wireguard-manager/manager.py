@@ -19,6 +19,9 @@ def interface():
 @app.route('/peer', methods=['GET', 'POST'])
 def peer():
     form = PeerForm()
+    if form.validate_on_submit():
+        flash(f'You have submitted a valid form!', 'success')
+        return redirect(url_for('home'))
     return render_template('peer.html', title='', form=form)
 
 if __name__ == '__main__':
