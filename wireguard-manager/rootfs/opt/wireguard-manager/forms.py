@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
-from wtforms.validators import DataRequired, IPAddress, Length, NumberRange, Regexp
+from wtforms.validators import DataRequired, IPAddress, Length, NumberRange, Regexp, Optional
 
 class InterfaceForm(FlaskForm):
     interface = IntegerField('Interface Number',
@@ -12,7 +12,7 @@ class InterfaceForm(FlaskForm):
     subnet_mask = IntegerField('Subnet Mask',
         validators=[DataRequired(), NumberRange(min=1, max=32)])
     private_key = StringField('Private Key',
-        validators=[Length(min=44, max=44)])
+        validators=[Optional(), Length(min=44, max=44)])
     submit = SubmitField('Add Interface')
 
 class PeerForm(FlaskForm):
@@ -21,9 +21,9 @@ class PeerForm(FlaskForm):
     public_key = StringField('Public Key',
         validators=[DataRequired(), Length(min=44, max=44)])
     endpoint = StringField('Endpoint',
-        validators=[Regexp(regex="")])
+        validators=[Optional(), Regexp(regex="")])
     allowed_ips = StringField('Allowed IPs',
-        validators=[Regexp(regex="")])
+        validators=[DataRequired(), Regexp(regex="")])
     persistent = IntegerField('Persistent Keepalive',
-        validators=[NumberRange(min=1, max=30)])
+        validators=[Optional(), NumberRange(min=1, max=30)])
     submit = SubmitField('Add Peer')
