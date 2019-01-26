@@ -7,23 +7,68 @@
                     <legend>Interface Config</legend>
                     <div>
                         {{ form.interface.label(class="") }}
+                    {% if form.interface.errors %}
+                        {{ form.interface(class="error") }}
+                        <div>
+                        {% for error in form.interface.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.interface(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.port.label(class="") }}
+                    {% if form.port.errors %}
+                        {{ form.port(class="error") }}
+                        <div>
+                        {% for error in form.port.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.port(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.address.label(class="") }}
+                    {% if form.address.errors %}
+                        {{ form.address(class="error") }}
+                        <div>
+                        {% for error in form.address.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.address(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.subnet_mask.label(class="") }}
+                    {% if form.subnet_mask.errors %}
+                        {{ form.subnet_mask(class="error") }}
+                        <div>
+                        {% for error in form.subnet_mask.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.subnet_mask(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.private_key.label(class="") }}
+                    {% if form.private_key.errors %}
+                        {{ form.private_key(class="error") }}
+                        <div>
+                        {% for error in form.private_key.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.private_key(class="") }}
+                    {% endif %}
                     </div>
                 </fieldset>
                 <div>
