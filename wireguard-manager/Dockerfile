@@ -32,6 +32,7 @@ RUN \
     && pip install --no-cache-dir \
         Flask==1.0.2 \
         flask-wtf==0.14.2 \
+        flask-sqlalchemy==2.3.2 \
     \
     # Cleanup
     && rm -rf /tmp/* \
