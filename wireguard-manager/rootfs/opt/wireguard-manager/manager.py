@@ -29,7 +29,7 @@ class Peer(db.Model):
     endpoint = db.Column(db.String())
     allowed_ips = db.Column(db.String())
     persistent = db.Column(db.Integer)
-    interface_id = db.Column(db.Integer, db.ForiegnKey('integer.id'), nullable=False)
+    interface_id = db.Column(db.Integer, db.ForeignKey('integer.id'), nullable=False)
 
     def __repr__(self):
         return f"Peer('{self.peer}', '{self.endpoint}/{self.allowed_ips}')"
