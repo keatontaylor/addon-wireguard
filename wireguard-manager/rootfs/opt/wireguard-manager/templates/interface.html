@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+        <div>
+            <form action="" method="post">
+                <fieldset>
+                    <legend>Interface Config</legend>
+                    <div>
+                        {{ form.interface.label(class="") }}
+                        {{ form.interface(class="") }}
+                    </div>
+                    <div>
+                        {{ form.port.label(class="") }}
+                        {{ form.port(class="") }}
+                    </div>
+                    <div>
+                        {{ form.address.label(class="") }}
+                        {{ form.address(class="") }}
+                    </div>
+                    <div>
+                        {{ form.submit_mask.label(class="") }}
+                        {{ form.submit_mask(class="") }}
+                    </div>
+                    <div>
+                        {{ form.private_key.label(class="") }}
+                        {{ form.private_key(class="") }}
+                    </div>
+                </fieldset>
+                <div>
+                    {{ form.submit(class="") }}
+                </div>
+            </form>
+        </div>
+{% endblock content %}

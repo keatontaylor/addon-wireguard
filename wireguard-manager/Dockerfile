@@ -29,7 +29,9 @@ RUN \
     # Download Flask dependencies
     && curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py \
     && python3 /tmp/get-pip.py \
-    && pip install --no-cache-dir Flask==1.0.2 \
+    && pip install --no-cache-dir \
+        Flask==1.0.2 \
+        flask-wtf==0.14.2 \
     \
     # Cleanup
     && rm -rf /tmp/* \

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+        <div>
+            <form action="" method="post">
+                <fieldset>
+                    <legend>Peer Config</legend>
+                    <div>
+                        {{ form.peer.label(class="") }}
+                        {{ form.peer(class="") }}
+                    </div>
+                    <div>
+                        {{ form.public_key.label(class="") }}
+                        {{ form.public_key(class="") }}
+                    </div>
+                    <div>
+                        {{ form.endpoint.label(class="") }}
+                        {{ form.endpoint(class="") }}
+                    </div>
+                    <div>
+                        {{ form.allowed_ips.label(class="") }}
+                        {{ form.allowed_ips(class="") }}
+                    </div>
+                    <div>
+                        {{ form.persistent.label(class="") }}
+                        {{ form.persistent(class="") }}
+                    </div>
+                </fieldset>
+                <div>
+                    {{ form.submit(class="") }}
+                </div>
+            </form>
+        </div>
+{% endblock content %}
