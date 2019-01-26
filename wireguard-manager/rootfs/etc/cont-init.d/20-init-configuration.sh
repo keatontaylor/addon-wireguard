@@ -17,3 +17,5 @@ for port in ${PORTS_IN_USE[@]}; do
         hass.die 'Failed to use configured port, already in use'
     fi
 done
+
+sed -i -e "s/\"%%PORT%%\"/`hass.config.get 'port'`/" /opt/wireguard-manager/manager.py

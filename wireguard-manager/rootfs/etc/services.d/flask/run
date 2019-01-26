@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+# ==============================================================================
+# Hass.io Add-ons: WireGuard Manager
+# Runs the WireGuard Manager
+# ==============================================================================
+# shellcheck disable=SC1091
+source /usr/lib/hassio-addons/base.sh
+
+# Run the web ui
+exec /usr/bin/python3 /opt/wireguard-manager/manager.py \
+    || hass.die 'Failed to start web ui'

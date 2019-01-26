@@ -4,6 +4,7 @@
   "slug": "wireguard-manager",
   "description": "WireGuard VPN Manager",
   "url": "https://github.com/whiskerz007/addon-wireguard/wireguard-manager",
+  "webui": "http://[HOST]:[PORT:51820]",
   "startup": "application",
   "arch": [
     "aarch64",
