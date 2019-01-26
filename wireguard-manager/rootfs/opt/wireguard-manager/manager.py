@@ -8,12 +8,12 @@ app.config['SECRET_KEY'] = '6a598f99f0915fd9f158ae5597aad87d'
 def home():
     return render_template('home.html')
 
-@app.route('/interface')
+@app.route('/interface', methods=['GET', 'POST'])
 def interface():
     form = InterfaceForm()
     return render_template('interface.html', title='', form=form)
 
-@app.route('/peer')
+@app.route('/peer', methods=['GET', 'POST'])
 def peer():
     form = PeerForm()
     return render_template('peer.html', title='', form=form)
