@@ -7,23 +7,68 @@
                     <legend>Peer Config</legend>
                     <div>
                         {{ form.peer.label(class="") }}
+                    {% if form.peer.errors %}
+                        {{ form.peer(class="error") }}
+                        <div>
+                        {% for error in form.peer.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.peer(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.public_key.label(class="") }}
+                    {% if form.public_key.errors %}
+                        {{ form.public_key(class="error") }}
+                        <div>
+                        {% for error in form.public_key.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.public_key(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.endpoint.label(class="") }}
+                    {% if form.endpoint.errors %}
+                        {{ form.endpoint(class="error") }}
+                        <div>
+                        {% for error in form.endpoint.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.endpoint(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.allowed_ips.label(class="") }}
+                    {% if form.allowed_ips.errors %}
+                        {{ form.allowed_ips(class="error") }}
+                        <div>
+                        {% for error in form.allowed_ips.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.allowed_ips(class="") }}
+                    {% endif %}
                     </div>
                     <div>
                         {{ form.persistent.label(class="") }}
+                    {% if form.persistent.errors %}
+                        {{ form.persistent(class="error") }}
+                        <div>
+                        {% for error in form.persistent.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
                         {{ form.persistent(class="") }}
+                    {% endif %}
                     </div>
                 </fieldset>
                 <div>
