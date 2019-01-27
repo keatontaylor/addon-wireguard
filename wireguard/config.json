@@ -1,6 +1,6 @@
 {
   "name": "WireGuard",
-  "version": "0.0.20181222",
+  "version": "0.0.20190123",
   "slug": "wireguard",
   "description": "WireGuard VPN",
   "url": "https://github.com/whiskerz007/addon-wireguard/wireguard",

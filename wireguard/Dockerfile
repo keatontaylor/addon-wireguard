@@ -16,7 +16,7 @@ RUN \
     && apk add --no-cache \
         go@edge=1.11.4-r0 \
         iptables=1.6.2-r0 \
-        wireguard-tools-wg@edge=0.0.20181218-r2 \
+        wireguard-tools-wg@edge=0.0.20190123-r2 \
     \
     && git clone --branch "0.0.20181222" --depth=1 \
         "https://git.zx2c4.com/wireguard-go" /tmp/wireguard \
