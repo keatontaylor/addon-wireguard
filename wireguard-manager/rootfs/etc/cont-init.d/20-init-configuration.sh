@@ -21,6 +21,7 @@ done
 sed -i -e "s/\"%%PORT%%\"/`hass.config.get 'port'`/" /opt/wireguard-manager/manager.py
 
 if [ ! -f /data/wg.db ]; then
-    python3 -c 'from manager import db;db.create_all()' \
+    cd /opt/wireguard-manager \
+    && python3 -c 'from manager import db;db.create_all()' \
         || hass.die 'Failed to create new database'
 fi
