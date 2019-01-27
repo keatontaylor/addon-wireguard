@@ -18,7 +18,7 @@ for port in ${PORTS_IN_USE[@]}; do
     fi
 done
 
-sed -i -e "s/\"%%PORT%%\"/`hass.config.get 'port'`/" /opt/wireguard-manager/manager.py
+sed -i -e "s/\"%%PORT%%\"/`hass.config.get 'port'`/" /opt/wireguard-manager/app.py
 
 if [ ! -f /data/wg.db ]; then
     cd /opt/wireguard-manager \
