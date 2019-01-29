@@ -14,7 +14,7 @@ RUN \
         git=2.18.1-r0 \
     \
     && apk add --no-cache \
-        go@edge=1.11.4-r0 \
+        go@edge=1.11.5-r0 \
         iptables=1.6.2-r0 \
         wireguard-tools-wg@edge=0.0.20190123-r2 \
     \
