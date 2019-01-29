@@ -11,6 +11,9 @@ def home():
 def interface():
     form = InterfaceForm()
     if form.validate_on_submit():
+        if form.private_key.data:
+            # Run `wg pubkey` against private_key entered
+        
         flash(f'You have submitted a valid form!', 'success')
         return redirect(url_for('home'))
     return render_template('interface.html', title='', form=form)
