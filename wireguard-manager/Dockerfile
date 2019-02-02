@@ -10,6 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Setup base
 RUN \
     apk add --no-cache \
+        iproute2=4.13.0-r0 \
         iptables=1.6.2-r0 \
         python3=3.6.6-r0 \
         wireguard-tools-wg@edge=0.0.20190123-r2 \
