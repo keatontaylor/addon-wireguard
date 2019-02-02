@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, IPAddress, Length, NumberRange, Reg
 
 class InterfaceForm(FlaskForm):
     interface = IntegerField('Interface Number',
-        validators=[DataRequired(), NumberRange(min=0, max=999)])
+        validators=[DataRequired(), NumberRange(min=1, max=999)])
     port = IntegerField('Port',
         validators=[DataRequired(), NumberRange(min=1, max=65535)])
     address = StringField('IP Address',
