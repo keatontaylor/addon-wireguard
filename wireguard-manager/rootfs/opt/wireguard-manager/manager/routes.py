@@ -22,9 +22,10 @@ def interface():
 
         # Check if IP address exists on any other interface
         ip_list = check_output(['ip', '-br', 'addr']).decode().splitlines()
+        ips = []
         for item in ip_list:
             if len(item) > 2:
-                ips = ips + item[2:]
+                ips.append(item[2:])
         for ip in ips:
             if Network(f'{ip}').info() == f'LINK-LOCAL':
                 if ip == f'{form.address.data}/{form.subnet_mask.data}':
