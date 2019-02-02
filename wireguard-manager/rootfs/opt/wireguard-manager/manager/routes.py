@@ -25,7 +25,7 @@ def interface():
         ips = []
         for item in ip_list:
             if len(item) > 2:
-                ips.append(item.split()[2:])
+                ips.extend(item.split()[2:])
         for ip in ips:
             if Network(f'{ip}').info() == f'LINK-LOCAL':
                 if ip == f'{form.address.data}/{form.subnet_mask.data}':
