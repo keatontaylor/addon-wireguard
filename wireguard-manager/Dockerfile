@@ -25,7 +25,7 @@ RUN \
     # Cleanup
     && rm -rf /tmp/* \
         /usr/bin/pip \
-        /usr/lib/python3.6/site-packages/{pip*,pkg_resources,setuptools*,easy_install.py,__pycache__} \
+        /usr/lib/python3.6/site-packages/{pip*,pkg_resources,setuptools*,easy_install.py,__pycache__}
 
 # Copy root filesystem
 COPY rootfs /
