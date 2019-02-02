@@ -7,6 +7,7 @@ class Interface(db.Model):
     address = db.Column(db.String(), unique=True, nullable=False)
     subnet_mask = db.Column(db.Integer, nullable=False)
     private_key = db.Column(db.String(44), unique=True, nullable=False)
+    enabled = db.Column(db.Boolean, nullable=False, default=False)
     peers = db.relationship('Peer', backref='interface', lazy=True)
 
     def __repr__(self):
@@ -20,6 +21,7 @@ class Peer(db.Model):
     endpoint = db.Column(db.String())
     allowed_ips = db.Column(db.String())
     persistent = db.Column(db.Integer)
+    enabled = db.Column(db.Boolean, nullable=False, default=False)
     interface_id = db.Column(db.Integer, db.ForeignKey('interface.id'), nullable=False)
 
     def __repr__(self):
