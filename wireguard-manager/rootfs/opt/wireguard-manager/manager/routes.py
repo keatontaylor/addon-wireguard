@@ -14,7 +14,7 @@ def interface():
     if form.validate_on_submit():
         failed = False
         # Check if port is in use
-        p = run(['/opt/port_in_use.sh', 'udp', form.port.data.str])
+        p = run(['/opt/port_in_use.sh', 'udp', str(form.port.data)])
         if p.returncode != 0:
             flash(f'UDP port {form.port.data.str} is already in use.')
             failed = True
