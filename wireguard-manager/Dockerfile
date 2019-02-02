@@ -22,7 +22,7 @@ RUN \
         flask-wtf==0.14.2 \
         flask-sqlalchemy==2.3.2 \
         ipcalc==1.99.0 \
-        six=1.12.0 \
+        six==1.12.0 \
     \
     # Cleanup
     && rm -rf /tmp/* \
