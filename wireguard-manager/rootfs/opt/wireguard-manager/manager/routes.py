@@ -16,7 +16,7 @@ def interface():
         # Check if port is in use
         p = run(['/opt/port_in_use.sh', 'udp', form.port.data])
         if p.returncode != 0:
-            flash(f'UDP port 'form.port.data' is already in use.')
+            flash(f'UDP port {form.port.data} is already in use.')
             failed = True
         
         # Check if IP address exists on any other interface
