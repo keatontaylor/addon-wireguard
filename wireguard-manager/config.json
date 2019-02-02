@@ -18,9 +18,7 @@
   "homeassistant_api": false,
   "host_network": true,
   "map": [ ],
-  "devices": [
-    "/dev/net/tun:/dev/net/tun:rwm"
-  ],
+  "devices": [ ],
   "privileged": [ "NET_ADMIN" ],
   "options": {
     "log_level": "info",
