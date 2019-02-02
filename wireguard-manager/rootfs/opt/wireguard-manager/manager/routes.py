@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from manager import app
 from manager.forms import InterfaceForm, PeerForm
 from manager.models import Interface, Peer
-from subprocess import run, PIPE
+from subprocess import run, PIPE, check_output
 from ipcalc import Network
 
 @app.route('/')
@@ -21,7 +21,7 @@ def interface():
             failed = True
 
         # Check if IP address exists on any other interface
-        ip_list = subprocess.check_output(['ip', '-br', 'addr']).decode().split()
+        ip_list = check_output(['ip', '-br', 'addr']).decode().split()
         ips = set(ip_list) - set(ip_list[::4] + ip_list[1::4])
         for ip in ips:
             if Network(f'{ip}').info() == f'LINK-LOCAL':
