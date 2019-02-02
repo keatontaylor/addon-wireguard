@@ -10,7 +10,7 @@ class InterfaceForm(FlaskForm):
     address = StringField('IP Address',
         validators=[DataRequired(), IPAddress(ipv4=True, ipv6=True)])
     subnet_mask = IntegerField('Subnet Mask',
-        validators=[DataRequired(), NumberRange(min=1, max=32)])
+        validators=[DataRequired(), NumberRange(min=1, max=128)])
     private_key = StringField('Private Key',
         validators=[Optional(), Length(min=44, max=44)])
     submit = SubmitField('Add Interface')

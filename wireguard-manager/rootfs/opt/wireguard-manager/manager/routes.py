@@ -3,6 +3,7 @@ from manager import app
 from manager.forms import InterfaceForm, PeerForm
 from manager.models import Interface, Peer
 from subprocess import run, PIPE
+from ipcalc import Network
 
 @app.route('/')
 def home():
@@ -18,8 +19,18 @@ def interface():
         if p.returncode != 0:
             flash(f'UDP port {str(form.port.data)} is already in use.')
             failed = True
-        
+
         # Check if IP address exists on any other interface
+        ip_list = subprocess.check_output(['ip', '-br', 'addr']).decode().split()
+        ips = set(ip_list) - set(ip_list[::4] + ip_list[1::4])
+        for ip in ips:
+            if Network(f'{ip}').info() == f'LINK-LOCAL':
+                if ip == f'{form.address.data}/{form.subnet_mask.data}':
+                    flash(f'{form.address.data}/{form.subnet_mask.data} is already assigned to another interface.')
+                    failed = True
+            elif Network(f'{form.address.data}/{form.subnet_mask.data}').check_collision(ip):
+                flash(f'{form.address.data}/{form.subnet_mask.data} is part of a network already assigned to an interface.')
+                failed = True
 
         # Check if private_key is valid WireGuard key
         if form.private_key.data:
@@ -30,7 +41,7 @@ def interface():
             if p.returncode != 0:
                 flash(p.stderr.decode().split(': ')[1].rstrip())
                 failed = True
-        
+
         if not failed:
             flash(f'You have submitted a valid form!', 'success')
             return redirect(url_for('home'))
