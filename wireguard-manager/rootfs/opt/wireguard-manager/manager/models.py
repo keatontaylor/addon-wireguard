@@ -12,7 +12,7 @@ class Interface(db.Model):
     peers = db.relationship('Peer', backref='interface', lazy=True)
 
     def __repr__(self):
-        return f"Interface('wg{self.interface}', '{self.address}/{self.subnet_mask}')"
+        return f"Interface('wg{self.interface}', '{self.address}/{self.netmask}')"
 
 
 class Peer(db.Model):
