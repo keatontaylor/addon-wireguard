@@ -40,10 +40,10 @@ class InterfaceForm(FlaskForm):
                 ips.extend(item.split()[2:])
         for ip in ips:
             if Network(f'{ip}').info() == f'LINK-LOCAL':
-                if ip == f'{form.address.data}/{form.netmask.data}':
-                    raise ValidationError('{form.address.data}/{form.netmask.data} is already assigned to another interface.')
-            elif Network(f'{form.address.data}/{form.netmask.data}').check_collision(ip):
-                raise ValidationError('{form.address.data}/{form.netmask.data} is part of a network already assigned to an interface.')
+                if ip == f'{address.data}/{netmask.data}':
+                    raise ValidationError('{form.address.data}/{netmask.data} is already assigned to another interface.')
+            elif Network(f'{address.data}/{netmask.data}').check_collision(ip):
+                raise ValidationError('{address.data}/{netmask.data} is part of a network already assigned to an interface.')
         if interface:
             raise ValidationError('That address is already being used.')
 
