@@ -27,7 +27,7 @@ class InterfaceForm(FlaskForm):
         interface = Interface.query.filter_by(port=port.data).first()
         p = run(['/opt/port_in_use.sh', 'udp', str(port.data)])
         if p.returncode != 0:
-            raise ValidationError('UDP port {str(port.data)} is already in use.')
+            raise ValidationError('UDP port {port.data} is already in use.')
         if interface:
             raise ValidationError('That port number is already being used.')
 
