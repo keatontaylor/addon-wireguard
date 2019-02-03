@@ -45,16 +45,16 @@
                     {% endif %}
                     </div>
                     <div>
-                        {{ form.subnet_mask.label(class="") }}
-                    {% if form.subnet_mask.errors %}
-                        {{ form.subnet_mask(class="error") }}
+                        {{ form.netmask.label(class="") }}
+                    {% if form.netmask.errors %}
+                        {{ form.netmask(class="error") }}
                         <div>
-                        {% for error in form.subnet_mask.errors %}
+                        {% for error in form.netmask.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.subnet_mask(class="") }}
+                        {{ form.netmask(class="") }}
                     {% endif %}
                     </div>
                     <div>
