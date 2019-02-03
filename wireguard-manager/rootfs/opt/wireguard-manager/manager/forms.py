@@ -40,16 +40,18 @@ class InterfaceForm(FlaskForm):
                 ips.extend(item.split()[2:])
         for ip in ips:
             if Network(f'{ip}').info() == f'LINK-LOCAL':
-                if ip == f'{address.data}/{netmask.data}':
-                    raise ValidationError('{form.address.data}/{netmask.data} is already assigned to another interface.')
-            elif Network(f'{address.data}/{netmask.data}').check_collision(ip):
-                raise ValidationError('{address.data}/{netmask.data} is part of a network already assigned to an interface.')
+                if ip == f'{address.data}/{self.netmask.data}':
+                    raise ValidationError('{address.data}/{self.netmask.data} is already assigned to another interface.')
+            elif Network(f'{address.data}/{self.netmask.data}').check_collision(ip):
+                raise ValidationError('{address.data}/{self.netmask.data} is part of a network already assigned to an interface.')
         if interface:
             raise ValidationError('That address is already being used.')
 
     def validate_private_key(self, private_key):
         interface = Interface.query.filter_by(private_key=private_key.data).first()
         if private_key.data:
+            if len(private_key.data) != 44:
+                raise ValidationError('The private key must equal 44 characters.')
             p = run(["wg", "pubkey"],
                     stdout=PIPE,
                     stderr=PIPE,
