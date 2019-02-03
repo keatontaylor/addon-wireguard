@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, IPAddress, Length, NumberRange, Regexp, Optional, ValidationError
-from manager import Interface
+from manager.models import Interface
 from subprocess import run, PIPE, check_output
 from ipcalc import Network
 
