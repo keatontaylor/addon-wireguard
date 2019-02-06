@@ -1,4 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
-        <p>Home page!</p>
+    <p>Home page!</p>
+    <table>
+        <tr>
+            <td>Interface</td>
+            <td>Port</td>
+            <td>Address</td>
+            <td>Private Key</td>
+            <td>Enabled</td>
+        </tr>
+    {% for interface in interfaces %}
+        <tr>
+            <td>{{ interface.number }}</td>
+            <td>{{ interface.port }}</td>
+            <td>{{ interface.address }}/{{ interface.netmask }}</td>
+            <td>{{ interface.private_key }}</td>
+            <td>{{ interface.enabled }}</td>
+        </tr>
+    {% endfor %}
+    </table>
 {% endblock content %}

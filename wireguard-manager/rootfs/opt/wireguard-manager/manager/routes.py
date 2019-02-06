@@ -5,13 +5,14 @@ from manager.models import Interface, Peer
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    interfaces = Interface.query.all()
+    return render_template('home.html', interfaces=interfaces)
 
 @app.route('/interface', methods=['GET', 'POST'])
 def interface():
     form = InterfaceForm()
     if form.validate_on_submit():
-        interface = Interface(interface=form.interface.data,
+        interface = Interface(number=form.number.data,
                                 port=form.port.data,
                                 address=form.address.data,
                                 netmask=form.netmask.data,

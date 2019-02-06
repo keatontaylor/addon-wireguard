@@ -6,7 +6,7 @@ from subprocess import run, PIPE, check_output
 from ipcalc import Network
 
 class InterfaceForm(FlaskForm):
-    interface = IntegerField('Interface Number',
+    number = IntegerField('Interface Number',
         validators=[DataRequired(), NumberRange(min=1, max=999)])
     port = IntegerField('Port',
         validators=[DataRequired(), NumberRange(min=1, max=65535)])
@@ -19,9 +19,9 @@ class InterfaceForm(FlaskForm):
         filters=[lambda v: None if v == '' else v])
     submit = SubmitField('Add Interface')
 
-    def validate_interface(self, interface):
-        interface = Interface.query.filter_by(interface=interface.data).first()
-        if interface:
+    def validate_number(self, number):
+        number = Interface.query.filter_by(number=number.data).first()
+        if number:
             raise ValidationError('That interface number is already being used.')
 
     def validate_port(self, port):

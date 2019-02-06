@@ -6,16 +6,16 @@
                 <fieldset>
                     <legend>Interface Config</legend>
                     <div>
-                        {{ form.interface.label(class="") }}
-                    {% if form.interface.errors %}
-                        {{ form.interface(class="error") }}
+                        {{ form.number.label(class="") }}
+                    {% if form.number.errors %}
+                        {{ form.number(class="error") }}
                         <div>
-                        {% for error in form.interface.errors %}
+                        {% for error in form.number.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.interface(class="") }}
+                        {{ form.number(class="") }}
                     {% endif %}
                     </div>
                     <div>

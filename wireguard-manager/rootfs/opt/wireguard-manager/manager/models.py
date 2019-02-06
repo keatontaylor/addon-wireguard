@@ -3,7 +3,7 @@ from subprocess import check_output
 
 class Interface(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    interface = db.Column(db.Integer, unique=True, nullable=False)
+    number = db.Column(db.Integer, unique=True, nullable=False)
     port = db.Column(db.Integer, unique=True, nullable=False)
     address = db.Column(db.String(), unique=True, nullable=False)
     netmask = db.Column(db.Integer, nullable=False)
@@ -12,7 +12,7 @@ class Interface(db.Model):
     peers = db.relationship('Peer', backref='interface', lazy=True)
 
     def __repr__(self):
-        return f"Interface('wg{self.interface}', '{self.address}/{self.netmask}')"
+        return f"Interface('wg{self.number}', '{self.address}/{self.netmask}')"
 
 
 class Peer(db.Model):
