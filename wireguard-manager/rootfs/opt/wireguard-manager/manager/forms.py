@@ -15,7 +15,8 @@ class InterfaceForm(FlaskForm):
     netmask = IntegerField('Netmask',
         validators=[DataRequired(), NumberRange(min=1, max=128)])
     private_key = StringField('Private Key',
-        validators=[Optional(), Length(min=44, max=44)])
+        validators=[Optional(), Length(min=44, max=44)],
+        filters=[lambda v: None if v == '' else v])
     submit = SubmitField('Add Interface')
 
     def validate_interface(self, interface):
@@ -48,7 +49,7 @@ class InterfaceForm(FlaskForm):
             raise ValidationError('That address is already being used.')
 
     def validate_private_key(self, private_key):
-        interface = Interface.query.filter_by(private_key=private_key.data).first()
+#        interface = Interface.query.filter_by(private_key=private_key.data).first()
         if private_key.data:
             if len(private_key.data) != 44:
                 raise ValidationError('The private key must equal 44 characters.')
@@ -61,8 +62,8 @@ class InterfaceForm(FlaskForm):
 # Remove the following after adding default value to database
 #        else:
 #            private_key = check_output(['wg', 'genkey']).decode().rstrip()
-        if interface:
-            raise ValidationError('That private key is already being used.')
+#        if interface:
+#            raise ValidationError('That private key is already being used.')
 
 
 class PeerForm(FlaskForm):
