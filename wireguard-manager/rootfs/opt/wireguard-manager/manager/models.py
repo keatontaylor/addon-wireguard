@@ -7,7 +7,7 @@ class Interface(db.Model):
     port = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(), nullable=False)
     netmask = db.Column(db.Integer, nullable=False)
-    private_key = db.Column(db.String(44), nullable=False, unique=True, default=self.generate_private_key)
+    private_key = db.Column(db.String(44), nullable=False, unique=True, default=generate_private_key)
     enabled = db.Column(db.Boolean, nullable=False, default=False)
     peers = db.relationship('Peer', backref='interface', lazy=True)
 
