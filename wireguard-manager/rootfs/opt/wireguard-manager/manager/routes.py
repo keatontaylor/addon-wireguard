@@ -49,7 +49,7 @@ def interface(number):
     interface = Interface.query.get_or_404(number)
     return render_template('interface.html', title='', interface=interface)
 
-@app.route('interface/<int:number>/delete')
+@app.route('/interface/<int:number>/delete')
 def interface_delete(number):
     interface = Interface.query.get_or_404(number)
     return render_template('interface_delete.html', title='', interface=interface)
