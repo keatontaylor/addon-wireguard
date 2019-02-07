@@ -1,6 +1,9 @@
 from . import db
 from subprocess import check_output
 
+def generate_private_key():
+    return check_output(['wg', 'genkey']).decode().rstrip()
+
 class Interface(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, nullable=False)
@@ -13,9 +16,6 @@ class Interface(db.Model):
 
     def __repr__(self):
         return f"Interface('wg{self.number}', '{self.address}/{self.netmask}')"
-
-    def generate_private_key():
-        return check_output(['wg', 'genkey']).decode().rstrip()
 
 class Peer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
