@@ -33,9 +33,12 @@ def interface_edit(id):
         interface.address=form.address.data
         interface.netmask=form.netmask.data
         interface.private_key=form.private_key.data
-        db.session.commit()
-        flash('You have updated the interface!', 'success')
-        return redirect(url_for('home'))
+        try:
+            db.session.commit()
+            flash('You have updated the interface!', 'success')
+            return redirect(url_for('home'))
+        except exc.IntegrityError as e:
+            flash(f'ERROR: {e}')
     elif request.method == 'GET':
         form.number.data = interface.number
         form.port.data = interface.port
