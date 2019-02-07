@@ -40,6 +40,10 @@ def interface_edit(id):
             return redirect(url_for('home'))
         except IntegrityError as e:
             flash(f'ERROR: {e}')
+            flash(f'{e.detail}')
+            flash(f'{e.orig}')
+            flash(f'{e.params}')
+            flash(f'{e.statement}')
     elif request.method == 'GET':
         form.number.data = interface.number
         form.port.data = interface.port
