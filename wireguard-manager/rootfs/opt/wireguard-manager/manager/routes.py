@@ -19,9 +19,12 @@ def interface_new():
                                 netmask=form.netmask.data,
                                 private_key=form.private_key.data)
         db.session.add(interface)
-        db.session.commit()
-        flash('You have submitted a valid form!', 'success')
-        return redirect(url_for('home'))
+        try:
+            db.session.commit()
+            flash('You have submitted a valid form!', 'success')
+            return redirect(url_for('home'))
+        except IntegrityError as e:
+            flash(f'{e.orig}')
     return render_template('interface_form.html', title='', form=form)
 
 @app.route('/interface/<int:id>/edit', methods=['GET', 'POST'])
@@ -39,11 +42,7 @@ def interface_edit(id):
             flash('You have updated the interface!', 'success')
             return redirect(url_for('home'))
         except IntegrityError as e:
-            flash(f'ERROR: {e}')
-            flash(f'{e.detail}')
             flash(f'{e.orig}')
-            flash(f'{e.params}')
-            flash(f'{e.statement}')
     elif request.method == 'GET':
         form.number.data = interface.number
         form.port.data = interface.port
