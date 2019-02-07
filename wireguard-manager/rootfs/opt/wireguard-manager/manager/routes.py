@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from . import app, db
 from .forms import InterfaceForm, PeerForm
 from .models import Interface, Peer
+from sqlalchemy.exc import IntegrityError
 
 @app.route('/')
 def home():
@@ -37,8 +38,8 @@ def interface_edit(id):
             db.session.commit()
             flash('You have updated the interface!', 'success')
             return redirect(url_for('home'))
-        except exc.IntegrityError as e:
-            flash(f'ERROR: {e}')
+        except IntegrityError as e:
+            flash(f'ERROR: {e.message}')
     elif request.method == 'GET':
         form.number.data = interface.number
         form.port.data = interface.port
