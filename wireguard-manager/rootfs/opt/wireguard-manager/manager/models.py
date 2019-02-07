@@ -1,22 +1,21 @@
 from . import db
 from subprocess import check_output
 
-def get_private_key():
-    return check_output(['wg', 'genkey']).decode().rstrip()
-
 class Interface(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, nullable=False)
     port = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(), nullable=False)
     netmask = db.Column(db.Integer, nullable=False)
-    private_key = db.Column(db.String(44), nullable=False, default=get_private_key)
+    private_key = db.Column(db.String(44), nullable=False, unique=True, default=self.generate_private_key)
     enabled = db.Column(db.Boolean, nullable=False, default=False)
     peers = db.relationship('Peer', backref='interface', lazy=True)
 
     def __repr__(self):
         return f"Interface('wg{self.number}', '{self.address}/{self.netmask}')"
 
+    def generate_private_key():
+        return check_output(['wg', 'genkey']).decode().rstrip()
 
 class Peer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
