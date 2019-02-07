@@ -49,9 +49,14 @@ def interface(id):
     interface = Interface.query.get_or_404(id)
     return render_template('interface.html', title='', interface=interface)
 
-@app.route('/interface/<int:id>/delete')
+@app.route('/interface/<int:id>/delete', methods=['GET', 'POST'])
 def interface_delete(id):
     interface = Interface.query.get_or_404(id)
+    if request.method == 'POST':
+        db.session.delete(interface)
+        db.session.commit()
+        flash('The interface has been deleted.', 'success')
+        return redirect(url_for('home'))
     return render_template('interface_delete.html', title='', interface=interface)
 
 @app.route('/peer', methods=['GET', 'POST'])

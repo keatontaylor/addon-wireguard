@@ -7,6 +7,9 @@
         <li><strong>Address:</strong> {{ interface.address }}/{{ interface.netmask }}</li>
         <li><strong>Private Key:</strong> {{ interface.private_key }}</li>
     </ul>
-    <a href="#">No</a>
+    <a href="{{ url_for('home') }}">Cancel</a>
+    <form action="{{ url_for('interface_delete', id=interface.id) }}" method="post">
+        <input type="submit" value="Delete">
+    </form>
     <a href="#">Confirm</a>
 {% endblock content %}
