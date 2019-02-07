@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from manager import app, db
 from manager.forms import InterfaceForm, PeerForm
 from manager.models import Interface, Peer
