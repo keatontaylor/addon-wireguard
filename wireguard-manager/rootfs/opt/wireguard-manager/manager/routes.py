@@ -23,9 +23,9 @@ def interface_new():
         return redirect(url_for('home'))
     return render_template('interface_form.html', title='', form=form)
 
-@app.route('/interface/<int:number>/edit', methods=['GET', 'POST'])
-def interface_edit(number):
-    interface = Interface.query.get_or_404(number)
+@app.route('/interface/<int:id>/edit', methods=['GET', 'POST'])
+def interface_edit(id):
+    interface = Interface.query.get_or_404(id)
     form = InterfaceForm()
     if form.validate_on_submit():
         interface.number=form.number.data
@@ -44,14 +44,14 @@ def interface_edit(number):
         form.private_key.data = interface.private_key
     return render_template('interface_form.html', title='', form=form)
 
-@app.route('/interface/<int:number>')
-def interface(number):
-    interface = Interface.query.get_or_404(number)
+@app.route('/interface/<int:id>')
+def interface(id):
+    interface = Interface.query.get_or_404(id)
     return render_template('interface.html', title='', interface=interface)
 
-@app.route('/interface/<int:number>/delete')
-def interface_delete(number):
-    interface = Interface.query.get_or_404(number)
+@app.route('/interface/<int:id>/delete')
+def interface_delete(id):
+    interface = Interface.query.get_or_404(id)
     return render_template('interface_delete.html', title='', interface=interface)
 
 @app.route('/peer', methods=['GET', 'POST'])

@@ -17,7 +17,7 @@
             <td>{{ interface.address }}/{{ interface.netmask }}</td>
             <td>{{ interface.private_key }}</td>
             <td><a href="#">{{ interface.enabled }}</a></td>
-            <td><a href="{{ url_for('interface_edit', number=interface.number) }}">Edit</a> / <a href="{{ url_for('interface_delete', number=interface.number) }}">Delete</a></td>
+            <td><a href="{{ url_for('interface_edit', id=interface.id) }}">Edit</a> / <a href="{{ url_for('interface_delete', id=interface.id) }}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>
