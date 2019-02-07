@@ -8,6 +8,7 @@
             <td>Address</td>
             <td>Private Key</td>
             <td>Enabled</td>
+            <td>Actions</td>
         </tr>
     {% for interface in interfaces %}
         <tr>
@@ -15,7 +16,8 @@
             <td>{{ interface.port }}</td>
             <td>{{ interface.address }}/{{ interface.netmask }}</td>
             <td>{{ interface.private_key }}</td>
-            <td>{{ interface.enabled }}</td>
+            <td><a href="#">{{ interface.enabled }}</a></td>
+            <td><a href="#">Edit</a> / <a href="{{ url_for('interface_delete', number=interface.number) }}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>

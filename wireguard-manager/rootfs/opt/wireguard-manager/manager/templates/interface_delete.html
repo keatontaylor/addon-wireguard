@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
+    <p>Are you sure you want to delete the following interface?</p>
     <ul>
         <li><strong>Interface:</strong> wg{{ interface.number }}</li>
         <li><strong>Port:</strong> {{ interface.port }}</li>
         <li><strong>Address:</strong> {{ interface.address }}/{{ interface.netmask }}</li>
         <li><strong>Private Key:</strong> {{ interface.private_key }}</li>
-        <li><strong>Enabled:</strong> {{ interface.enabled }}</li>
     </ul>
+    <a href="#">No</a>
+    <a href="#">Confirm</a>
 {% endblock content %}
