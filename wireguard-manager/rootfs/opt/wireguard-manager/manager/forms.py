@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, IPAddress, Length, NumberRange, Regexp, Optional, ValidationError
-from manager.models import Interface
+from .models import Interface
 from subprocess import run, PIPE, check_output
 from ipcalc import Network
 
@@ -19,21 +19,21 @@ class InterfaceForm(FlaskForm):
         filters=[lambda v: None if v == '' else v])
     submit = SubmitField('Add Interface')
 
-    def validate_number(self, number):
-        number = Interface.query.filter_by(number=number.data).first()
-        if number:
-            raise ValidationError('That interface number is already being used.')
+#    def validate_number(self, number):
+#        interface = Interface.query.filter_by(number=number.data).first()
+#        if interface:
+#            raise ValidationError('That interface number is already being used.')
 
     def validate_port(self, port):
-        interface = Interface.query.filter_by(port=port.data).first()
+#        interface = Interface.query.filter_by(port=port.data).first()
         p = run(['/opt/port_in_use.sh', 'udp', str(port.data)])
         if p.returncode != 0:
             raise ValidationError(f'UDP port {port.data} is already in use.')
-        if interface:
-            raise ValidationError('That port number is already being used.')
+#        if interface:
+#            raise ValidationError('That port number is already being used.')
 
     def validate_address(self, address):
-        interface = Interface.query.filter_by(address=address.data).first()
+#        interface = Interface.query.filter_by(address=address.data).first()
         ip_list = check_output(['ip', '-br', 'addr']).decode().splitlines()
         ips = []
         for item in ip_list:
@@ -42,11 +42,11 @@ class InterfaceForm(FlaskForm):
         for ip in ips:
             if Network(f'{ip}').info() == f'LINK-LOCAL':
                 if ip == f'{address.data}/{self.netmask.data}':
-                    raise ValidationError('{address.data}/{self.netmask.data} is already assigned to another interface.')
+                    raise ValidationError(f'{address.data}/{self.netmask.data} is already assigned to another interface.')
             elif Network(f'{address.data}/{self.netmask.data}').check_collision(ip):
                 raise ValidationError('{address.data}/{self.netmask.data} is part of a network already assigned to an interface.')
-        if interface:
-            raise ValidationError('That address is already being used.')
+#        if interface:
+#            raise ValidationError('That address is already being used.')
 
     def validate_private_key(self, private_key):
 #        interface = Interface.query.filter_by(private_key=private_key.data).first()

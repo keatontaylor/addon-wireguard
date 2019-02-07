@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
-from manager import app, db
-from manager.forms import InterfaceForm, PeerForm
-from manager.models import Interface, Peer
+from . import app, db
+from .forms import InterfaceForm, PeerForm
+from .models import Interface, Peer
 
 @app.route('/')
 def home():
@@ -23,8 +23,8 @@ def interface_new():
         return redirect(url_for('home'))
     return render_template('interface_form.html', title='', form=form)
 
-@app.route('/interface/<int:number>/update', methods=['GET', 'POST'])
-def interface_update(number):
+@app.route('/interface/<int:number>/edit', methods=['GET', 'POST'])
+def interface_edit(number):
     interface = Interface.query.get_or_404(number)
     form = InterfaceForm()
     if form.validate_on_submit():

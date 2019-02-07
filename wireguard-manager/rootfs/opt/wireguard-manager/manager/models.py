@@ -1,4 +1,4 @@
-from manager import db
+from . import db
 from subprocess import check_output
 
 class Interface(db.Model):
